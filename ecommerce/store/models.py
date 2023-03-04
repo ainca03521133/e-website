@@ -2,7 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 # Create your models here.
 
-class Customer(models.Models):
+class Customer(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE ,null=True, blank=True) 
     #models.CASCDE是使此項資料關聯，一旦刪除，與之關聯的資料都會消失
     name = models.CharField(max_length=200,null=True)
@@ -20,8 +20,8 @@ class Product(models.Model):
     def __str__(self):
         return(self.name)
     
-class Order(models.Modl):
-    customer = models.ForeignKey(Customer, on_delete=models.SET_NULL, blank=True)
+class Order(models.Model):
+    customer = models.ForeignKey(Customer, on_delete=models.SET_NULL, blank=True, null=True)
     date_order = models.DateTimeField(auto_now_add=True)
     complete = models.BooleanField(default=False, null=True, blank=True)
     transaction_id = models.CharField(max_length=200, null=True)
